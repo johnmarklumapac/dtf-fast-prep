@@ -6,6 +6,8 @@
   </head>
   <body>
     <div class="panel">
+      <!-- Everything above the action bar scrolls; the bar stays pinned at the bottom. -->
+      <div class="scroll" id="scroll">
       <header class="header">
         <div class="byline">BY <span class="accent-orange">MR300DPI</span></div>
         <img class="title" src="images/title.png" alt="DTF FAST PREP" />
@@ -93,18 +95,11 @@
         </div>
       </section>
 
-      <!-- Setup: Run -->
-      <div class="action-row" id="setup-actions">
-        <div class="round-btn" id="help" title="Help">?</div>
-        <div class="btn btn-primary btn-lg" id="run">RUN DTF FAST PREP</div>
-        <div class="round-btn" id="settings" title="Settings">⚙</div>
-      </div>
-
       <!-- Edit: live adjustments on the new document -->
       <div id="edit-section" class="hidden">
         <div class="row">
-          <div class="btn btn-ghost grow" id="default-sliders">Default Sliders</div>
-          <div class="btn btn-ghost-orange grow" id="edit-halftones">Edit Halftones</div>
+          <div class="btn btn-ghost btn-sm grow" id="default-sliders">Default Sliders</div>
+          <div class="btn btn-ghost-orange btn-sm grow" id="edit-halftones">Edit Halftones</div>
         </div>
 
         <section class="card">
@@ -145,20 +140,28 @@
             <sp-radio value="high">High</sp-radio>
           </sp-radio-group>
         </section>
-
-        <div class="action-row">
-          <div class="btn btn-outline-orange btn-lg" id="cancel">Cancel</div>
-          <div class="btn btn-primary btn-lg" id="apply">Apply</div>
-        </div>
-      </div>
-
-      <div class="status-wrap">
-        <div class="status" id="status"></div>
       </div>
 
       <footer class="footer">
         <span class="site-link" id="site-link">www.mr300dpi.com</span>
       </footer>
+      </div>
+
+      <!-- Pinned action bar: always visible, whatever the panel height. -->
+      <div class="action-bar">
+        <div class="status-wrap">
+          <div class="status" id="status"></div>
+        </div>
+        <div class="action-row" id="setup-actions">
+          <div class="round-btn" id="help" title="Help">?</div>
+          <div class="btn btn-primary btn-lg" id="run">RUN DTF FAST PREP</div>
+          <div class="round-btn" id="settings" title="Settings">⚙</div>
+        </div>
+        <div class="action-row hidden" id="edit-actions">
+          <div class="btn btn-outline-orange btn-lg" id="cancel">Cancel</div>
+          <div class="btn btn-primary btn-lg" id="apply">Apply</div>
+        </div>
+      </div>
     </div>
 
     <!-- Help dialog -->

@@ -55,6 +55,11 @@ pixel is solid and the original fade comes from dot size.
   DTPrep-style structure (Default Sliders / Edit Halftones, three multi-handle sliders with
   number fields, Original/Shirt/Alpha/Mask segmented control, Post Cleanup, Cancel/Apply).
   Panel tab label is "Mr300dpi FastPrep".
+- Panel layout is a full-height flex column: `.scroll` (everything, scrolls with
+  `overflow-y: auto`) above a pinned `.action-bar` that is always visible. The bar holds
+  the status pill plus `#setup-actions` (? / Run / ⚙) in setup mode or `#edit-actions`
+  (Cancel / Apply) in edit mode. Never put the main action buttons inside `.scroll`.
+  Edit mode adds `body.editing` for a compact layout (smaller logo row, tighter cards).
 - Buttons are styled `div`s (`.btn`, `.btn-primary`, `.btn-ghost`, `.btn-outline-orange`,
   `.round-btn`, `.icon-btn`) because Spectrum `sp-button` colors can't be changed. They have
   hover/active states and a `busy` class (`setBusy()` in `js/index.js`) instead of `disabled`.

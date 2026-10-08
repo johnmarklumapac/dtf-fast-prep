@@ -72,6 +72,8 @@ const ui = {
   settings: $("settings"),
   run: $("run"),
   editSection: $("edit-section"),
+  editActions: $("edit-actions"),
+  scroll: $("scroll"),
   defaultSliders: $("default-sliders"),
   editHalftones: $("edit-halftones"),
   viewRow: $("view-row"),
@@ -814,6 +816,9 @@ function enterEditMode() {
   show(ui.setupActions, false);
   show(ui.halftoneSection, false);
   show(ui.editSection, true);
+  show(ui.editActions, true);
+  document.body.classList.add("editing");
+  ui.scroll.scrollTop = 0;
   ui.viewRow.querySelectorAll(".seg").forEach((btn) => {
     btn.classList.toggle("selected", btn.getAttribute("data-view") === "alpha");
   });
@@ -825,9 +830,11 @@ function exitEditMode() {
   if (renderTimer) clearTimeout(renderTimer);
   renderTimer = null;
   show(ui.editSection, false);
+  show(ui.editActions, false);
   show(ui.printSection, true);
   show(ui.setupActions, true);
   show(ui.halftoneSection, true);
+  document.body.classList.remove("editing");
   shownKey = "";
   updatePrintSize();
   restoreEditingPanels().catch((err) => console.warn("Could not restore panels", err));
