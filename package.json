@@ -4,9 +4,12 @@
   "private": true,
   "description": "DTFFastPrep Photoshop UXP panel (Fast Halftone)",
   "scripts": {
+    "lint": "eslint .",
     "test:halftone": "node test/run-halftone.js"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.12.0",
     "pngjs": "^7.0.0"
   }
 }

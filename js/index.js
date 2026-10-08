@@ -264,7 +264,7 @@ function loadJSON(key, fallback) {
   try {
     const raw = localStorage.getItem(key);
     return raw ? JSON.parse(raw) : fallback;
-  } catch (err) {
+  } catch {
     return fallback;
   }
 }
@@ -1046,7 +1046,7 @@ async function applyNow() {
             masked = false;
             try {
               await batchPlay([{ _obj: "delete", _target: [{ _ref: "channel", _enum: "channel", _value: "mask" }] }], {});
-            } catch (ignored) {
+            } catch {
               // No mask was created.
             }
             await writeLayerRGBA(doc, result.id, current.rgba, width, height, bounds);

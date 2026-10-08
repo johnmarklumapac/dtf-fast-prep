@@ -11,7 +11,7 @@ const png = new PNG({ width, height });
 for (let y = 0; y < height; y++) {
   for (let x = 0; x < width; x++) {
     const p = (y * width + x) * 4;
-    let r = 0, g = 0, b = 0;
+    let r, g, b;
     // Gray drop shadow under the disc, soft edge.
     const ds = Math.hypot(x - 215, y - 215) / 120;
     const shadow = Math.max(0, Math.min(1, (1.25 - ds) / 0.6)) * 0.45;

@@ -22,7 +22,9 @@ pixel is solid and the original fade comes from dot size.
 
 - Show a short plan and wait for the user's OK before writing files.
 - Ask before installing any dependency.
-- Never commit, push, or tag unless the user asks. Work on `master`; `main` is the PR target.
+- Never commit, push, or tag unless the user asks. Work on `main` (tracks `origin/main`,
+  https://github.com/johnmarklumapac/dtf-fast-prep). Commits use the repo-local identity
+  `johnmarklumapac <johnmarklumapac@users.noreply.github.com>`.
 - After each step, tell the user exactly how to test it (Node command and/or UXP
   Developer Tool steps).
 - Do one build-order step at a time unless told otherwise.
@@ -34,7 +36,10 @@ pixel is solid and the original fade comes from dot size.
   Plugin id `com.mr300dpi.dtffastprep`, name `DTFFastPrep`, panel entrypoint `mainPanel`.
 - Plain HTML/CSS/JS. No bundler, no framework, no TypeScript. UI uses Spectrum UXP widgets
   (`sp-picker`, `sp-checkbox`, `sp-textfield`, `sp-button`, …).
-- Node (v24) is used only for offline testing. `pngjs` is the only dev dependency.
+- Node (v24) is used only for offline testing and linting. Dev dependencies: `pngjs`
+  (tests), `eslint` + `@eslint/js` (lint). Nothing from `node_modules` ships in the plugin.
+- Lint with `npm run lint` (config: `eslint.config.js`, recommended rules; UXP globals for
+  `js/`, Node globals for `test/`). Keep it at zero problems.
 - `js/halftone.js` must stay **pure**: no `require("photoshop")`, no DOM, no Node APIs.
   It must load both in UXP (via `<script>`) and in Node (via `require`). Export with:
   It exports via `module.exports` (Node) and always sets `globalThis.DTFHalftone` (UXP).
@@ -66,6 +71,7 @@ pixel is solid and the original fade comes from dot size.
 
 ```
 manifest.json          UXP manifest (v5)
+eslint.config.js       ESLint flat config
 index.html             Panel markup (setup + edit mode, help/settings dialogs)
 css/styles.css         Panel styles
 images/title.png       Dotted logo (generated)
