@@ -1,0 +1,12 @@
+{
+  "name": "dtf-fast-prep",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DTFFastPrep Photoshop UXP panel (Fast Halftone)",
+  "scripts": {
+    "test:halftone": "node test/run-halftone.js"
+  },
+  "devDependencies": {
+    "pngjs": "^7.0.0"
+  }
+}

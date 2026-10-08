@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="panel">
+      <header class="header">
+        <div class="byline">BY <span class="accent-orange">MR300DPI</span></div>
+        <img class="title" src="images/title.png" alt="DTF FAST PREP" />
+        <div class="header-line"></div>
+      </header>
+
+      <!-- Presets -->
+      <section class="card">
+        <div class="card-label">Preset</div>
+        <div class="row">
+          <sp-picker id="preset" class="grow" label="Preset">
+            <sp-menu slot="options" id="preset-options">
+              <sp-menu-item>Default</sp-menu-item>
+            </sp-menu>
+          </sp-picker>
+          <div class="icon-btn" id="preset-menu-toggle" title="Preset options">☰</div>
+        </div>
+        <div class="preset-menu hidden" id="preset-menu">
+          <div class="row">
+            <sp-textfield id="preset-name" class="grow" placeholder="Preset name"></sp-textfield>
+            <div class="btn btn-primary btn-sm" id="preset-save">Save</div>
+          </div>
+          <div class="row">
+            <div class="btn btn-ghost btn-sm grow" id="preset-delete">Delete selected</div>
+            <div class="btn btn-ghost btn-sm grow" id="preset-reset">Reset to Default</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Print size (setup only) -->
+      <section class="card" id="print-section">
+        <div class="card-label">Print Size</div>
+        <div class="print-size" id="print-size-label">Current 300 DPI Print Size: – x – in</div>
+        <div class="row center">
+          <span class="label">Scale to</span>
+          <sp-textfield id="scale-width" class="num" type="number"></sp-textfield>
+          <span class="label dim">x</span>
+          <sp-textfield id="scale-height" class="num" type="number"></sp-textfield>
+          <span class="label dim">in</span>
+        </div>
+      </section>
+
+      <!-- Fast Halftone -->
+      <section id="halftone-section">
+        <div class="tab">Fast Halftone</div>
+        <div class="card card-tabbed">
+          <div class="row between">
+            <sp-checkbox id="halftone-enabled" checked>Enable Fast Halftone</sp-checkbox>
+            <sp-picker id="halftone-shape" class="shape-picker" label="Shape">
+              <sp-menu slot="options">
+                <sp-menu-item selected>Round</sp-menu-item>
+                <sp-menu-item>Ellipse</sp-menu-item>
+                <sp-menu-item>Line</sp-menu-item>
+              </sp-menu>
+            </sp-picker>
+          </div>
+          <div class="row columns">
+            <div class="column">
+              <div class="field-label">Frequency / Inch</div>
+              <sp-textfield id="halftone-frequency" class="num" type="number" value="30"></sp-textfield>
+            </div>
+            <div class="column">
+              <div class="field-label">Angle</div>
+              <sp-textfield id="halftone-angle" class="num" type="number" value="33"></sp-textfield>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Color tools -->
+      <section class="card">
+        <div class="card-label">Color</div>
+        <div class="color-tools">
+          <div class="color-rows">
+            <div class="color-row">
+              <sp-checkbox id="knockout-enabled" checked>Enable Color Knockout</sp-checkbox>
+              <div class="swatch" id="knockout-swatch" title="Knockout color (click to change)"></div>
+            </div>
+            <div class="color-row">
+              <span class="label">Shirt / BG Preview</span>
+              <div class="swatch" id="preview-swatch" title="Shirt/BG preview color (click to change)"></div>
+            </div>
+          </div>
+          <div class="link-btn active" id="color-link" title="Link knockout and preview colors">🔗</div>
+        </div>
+      </section>
+
+      <!-- Setup: Run -->
+      <div class="action-row" id="setup-actions">
+        <div class="round-btn" id="help" title="Help">?</div>
+        <div class="btn btn-primary btn-lg" id="run">RUN DTF FAST PREP</div>
+        <div class="round-btn" id="settings" title="Settings">⚙</div>
+      </div>
+
+      <!-- Edit: live adjustments on the new document -->
+      <div id="edit-section" class="hidden">
+        <div class="row">
+          <div class="btn btn-ghost grow" id="default-sliders">Default Sliders</div>
+          <div class="btn btn-ghost-orange grow" id="edit-halftones">Edit Halftones</div>
+        </div>
+
+        <section class="card">
+          <div class="card-label">Levels <span class="dim">Black / Midtone / White</span></div>
+          <div id="levels-slider"></div>
+          <div class="field-row">
+            <sp-textfield id="levels-black" class="num-sm" type="number"></sp-textfield>
+            <sp-textfield id="levels-gamma" class="num-sm" type="number"></sp-textfield>
+            <sp-textfield id="levels-white" class="num-sm" type="number"></sp-textfield>
+          </div>
+
+          <div class="card-label spaced">Output Levels <span class="dim">Force Halftones</span></div>
+          <div id="output-slider"></div>
+          <div class="field-row">
+            <sp-textfield id="output-low" class="num-sm" type="number"></sp-textfield>
+            <sp-textfield id="output-high" class="num-sm" type="number"></sp-textfield>
+          </div>
+
+          <div class="card-label spaced">Boost Shadow Amount</div>
+          <div class="boost-row">
+            <div id="boost-slider" class="grow"></div>
+            <sp-textfield id="boost-shadow" class="num-sm" type="number"></sp-textfield>
+          </div>
+        </section>
+
+        <div class="segmented" id="view-row">
+          <div class="seg" data-view="original">Original</div>
+          <div class="seg" data-view="shirt">Shirt</div>
+          <div class="seg selected" data-view="alpha">Alpha</div>
+          <div class="seg" data-view="mask">Mask</div>
+        </div>
+
+        <section class="card">
+          <div class="card-label">Post Cleanup</div>
+          <sp-radio-group id="cleanup" class="radio-row">
+            <sp-radio value="none">None</sp-radio>
+            <sp-radio value="standard" checked>Standard</sp-radio>
+            <sp-radio value="high">High</sp-radio>
+          </sp-radio-group>
+        </section>
+
+        <div class="action-row">
+          <div class="btn btn-outline-orange btn-lg" id="cancel">Cancel</div>
+          <div class="btn btn-primary btn-lg" id="apply">Apply</div>
+        </div>
+      </div>
+
+      <div class="status-wrap">
+        <div class="status" id="status"></div>
+      </div>
+
+      <footer class="footer">
+        <span class="site-link" id="site-link">www.mr300dpi.com</span>
+      </footer>
+    </div>
+
+    <!-- Help dialog -->
+    <dialog id="help-dialog">
+      <form method="dialog" class="dialog">
+        <div class="dialog-title">DTF FAST PREP</div>
+        <sp-body size="S">
+          Open your artwork and click Run DTF Fast Prep. A new document is created at the
+          "Scale to" size (300 DPI); your original is not changed. Then adjust live:
+        </sp-body>
+        <sp-body size="S">• Color Knockout removes the shirt color smoothly, so the shirt shows through.</sp-body>
+        <sp-body size="S">• Levels: alpha (0–255) at or below Black becomes clear, at or above White becomes solid; drag Midtone left to make soft areas more opaque.</sp-body>
+        <sp-body size="S">• Output Levels: lower High below 255 to force solid areas into dots.</sp-body>
+        <sp-body size="S">• Boost Shadow: keeps more of faint, soft areas.</sp-body>
+        <sp-body size="S">• Fast Halftone turns everything semi-transparent into solid dots (Edit Halftones for frequency, angle, shape).</sp-body>
+        <sp-body size="S">• Post Cleanup removes specks too small to print.</sp-body>
+        <sp-body size="S">• Original / Shirt / Alpha / Mask switch the view. While editing you stay on the new document. Apply adds the DTF Fast Prep layer with the halftone as its layer mask (Original is kept hidden below); Cancel closes the new document.</sp-body>
+        <footer class="dialog-buttons">
+          <div class="btn btn-primary" id="help-close">OK</div>
+        </footer>
+      </form>
+    </dialog>
+
+    <!-- Settings dialog -->
+    <dialog id="settings-dialog">
+      <form method="dialog" class="dialog">
+        <div class="dialog-title">SETTINGS</div>
+        <div class="row">
+          <span class="label grow">Standard cleanup: remove specks under (px)</span>
+          <sp-textfield id="setting-cleanup-standard" class="num-sm" type="number"></sp-textfield>
+        </div>
+        <div class="row">
+          <span class="label grow">High cleanup: remove specks under (px)</span>
+          <sp-textfield id="setting-cleanup-high" class="num-sm" type="number"></sp-textfield>
+        </div>
+        <footer class="dialog-buttons">
+          <div class="btn btn-ghost" id="settings-cancel">Cancel</div>
+          <div class="btn btn-primary" id="settings-save">Save</div>
+        </footer>
+      </form>
+    </dialog>
+
+    <script src="js/halftone.js"></script>
+    <script src="js/multislider.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

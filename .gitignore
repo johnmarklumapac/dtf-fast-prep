@@ -1,0 +1,7 @@
+node_modules
+*.ccx
+.DS_Store
+.env
+secrets.js
+test/output/
+test/sample.png

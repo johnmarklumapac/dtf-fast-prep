@@ -1,0 +1,22 @@
+{
+  "manifestVersion": 5,
+  "id": "com.mr300dpi.dtffastprep",
+  "name": "DTFFastPrep",
+  "version": "1.0.0",
+  "main": "index.html",
+  "host": { "app": "PS", "minVersion": "24.2.0", "data": { "apiVersion": 2 } },
+  "requiredPermissions": {
+    "launchProcess": { "schemes": ["https"], "extensions": [""] }
+  },
+  "entrypoints": [
+    {
+      "type": "panel",
+      "id": "mainPanel",
+      "label": { "default": "Mr300dpi FastPrep" },
+      "minimumSize": { "width": 280, "height": 480 },
+      "maximumSize": { "width": 2000, "height": 2000 },
+      "preferredDockedSize": { "width": 300, "height": 560 },
+      "preferredFloatingSize": { "width": 300, "height": 560 }
+    }
+  ]
+}
